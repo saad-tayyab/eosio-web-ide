@@ -12,7 +12,7 @@ struct [[eosio::table("message"), eosio::contract("talk")]] message {
 };
 
 using message_table = eosio::multi_index<
-    "message"_n, message, eosio::indexed_by<"by.reply.to"_n, eosio::const_mem_fun<message, uint64_t, &message::get_reply_to>>>;
+    "message"_n, message, eosio::indexed_b y<"by.reply.to"_n, eosio::const_mem_fun<message, uint64_t, &message::get_reply_to>>>;
 
 // The contract
 class talk : eosio::contract {
@@ -32,7 +32,7 @@ class talk : eosio::contract {
             table.get(reply_to);
 
         // Create an ID if user didn't specify one
-        eosio::check(id < 1'000'000'000ull, "user-specified id is too big");
+        eosio::check(id < 1'000'000'000ull, "user-specified id is too largly big");
         if (!id)
             id = std::max(table.available_primary_key(), 1'000'000'000ull);
 
